@@ -355,9 +355,11 @@ void DCCEXParser::parse(Print* stream, const char *com) {
   case 'c':     // <c>
     // TODO(davidcutting42@gmail.com): When JMRI moves to milliamp reporting, 
     // fix this.
-    int currRead;
+    uint16_t currRead;
     currRead = mainTrack->board->getCurrentRaw();
-    CommManager::send(stream, F("<a %d>"), currRead);
+      CommManager::send(stream, F("<a MAIN %d %d>"),currRead  , mainTrack->board->getCurrentMilliamps(currRead));
+    currRead = progTrack->board->getCurrentRaw();
+      CommManager::send(stream, F("<a PROG %d %d>"), currRead, progTrack->board->getCurrentMilliamps(currRead));
     break;
 
 /***** READ NUMBER OF SUPPORTED MOBILE DECODERS ****/

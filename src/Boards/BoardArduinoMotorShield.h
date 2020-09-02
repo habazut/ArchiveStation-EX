@@ -49,6 +49,8 @@ public:
     _config.prog_preambles = 22;
     _config.track_power_callback = nullptr; // Needs to be set in the main file
     _config.prog_threshold = 30;
+    _config.c_factor = 1598;
+    _config.c_devisor = 1000;
   }
 
   static void getDefaultConfigB(BoardConfigArduinoMotorShield& _config) {
@@ -66,6 +68,8 @@ public:
     _config.prog_preambles = 22;
     _config.track_power_callback = nullptr; // Needs to be set in the main file
     _config.prog_threshold = 30;
+    _config.c_factor = 1598;
+    _config.c_devisor = 1000;
   }
 
   void setup();

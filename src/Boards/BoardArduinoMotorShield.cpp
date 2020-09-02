@@ -72,9 +72,9 @@ uint16_t BoardArduinoMotorShield::getCurrentMilliamps() {
   return currentMilliamps;
 }
 
-uint16_t BoardArduinoMotorShield::getCurrentMilliamps(uint16_t reading) {
+uint16_t BoardArduinoMotorShield::getCurrentMilliamps(uint16_t raw) {
   uint16_t currentMilliamps;
-  currentMilliamps = reading / 1023.0 * config.board_voltage * 1000 * config.amps_per_volt;
+  currentMilliamps = raw * (uint32_t)config.c_factor / config.c_devisor;
   return currentMilliamps;
 }
 

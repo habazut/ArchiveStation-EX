@@ -62,7 +62,7 @@ void DCC::ackManagerSetup(uint16_t cv, uint8_t value,
 }
 
 void DCC::setAckPending() {
-  ackMaxCurrent = 0;
+  ackMaxCurrent = 0;  // board->resetAckMaxCurrent();
   ackPulseStart = 0;
   ackPulseDuration = 0;
   ackDetected = false;
@@ -87,7 +87,7 @@ void DCC::checkAck() {
   if (lastCurrent > ackMaxCurrent) ackMaxCurrent=lastCurrent;
 
   // Detect the leading edge of a pulse
-  if(lastCurrent > board->getThreshold()) {
+  if(lastCurrent > board->getThreshold()) {   // board->overThreshold()
     if (ackPulseStart==0) ackPulseStart=micros();    // leading edge of pulse detected
     return;
   }
@@ -101,7 +101,7 @@ void DCC::checkAck() {
     ackDetected=true;
     ackPending=false;
     transmitRepeats=0;  // shortcut remaining repeat packets
-    DIAG(F("\n\rGenuine ACK! micros=%d max=%d"), ackPulseDuration, ackMaxCurrent);
+    DIAG(F("\n\rGenuine ACK! micros=%d max=%d"), ackPulseDuration, ackMaxCurrent); // board->ackMaxCurrent()
     return;  // we have a genuine ACK result
   }      
 

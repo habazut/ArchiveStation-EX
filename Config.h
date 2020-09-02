@@ -31,7 +31,7 @@
 
 // Comment out this line to disable printing debug messages. Saves a lot of 
 // flash when turned off. Needs to be turned off for WiFi on the UNO. 
-//#define DEBUG_MODE
+#define DEBUG_MODE
 
 // Define your WiFi credentials here, comment out WIFI_EN to disable WiFi.
 #define WIFI_EN

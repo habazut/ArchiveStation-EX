@@ -55,6 +55,8 @@ struct BoardConfig
   int sense_pin;  
   float board_voltage;
   float amps_per_volt;
+  uint16_t c_factor;
+  uint16_t c_devisor;
   uint16_t current_trip;
   uint16_t current_trip_prog;
   uint16_t prog_trip_time;
