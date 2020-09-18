@@ -43,7 +43,7 @@ bool DCC::issueReminder(int reg) {
   
   switch (loopStatus) {
   case 0:
-//   DIAG(F("\nReminder %d speed %d"),loco,speedTable[reg].speedCode);
+      //DIAG(F("\nReminder %d speed %d"),loco,speedTable[reg].speedCode);
     setThrottle(loco, speedTable[reg].speedCode, response);
     break;
   case 1: // remind function group 1 (F0-F4)
@@ -378,12 +378,15 @@ uint8_t DCC::speedAndDirToCode(uint8_t speed, bool dir) {
 void DCC::updateSpeedTable(uint16_t cab, uint8_t speedCode) {
   if(cab == 0) {
     // broadcast to all locomotives
-    for(int dev = 0; dev < numDevices; dev++) 
-      speedTable[dev].speedCode = speedCode;
+      for(int dev = 0; dev < numDevices; dev++) {
+//	  DIAG(F("\nDev=%d speedCode=%d"),dev,speedCode);
+	  speedTable[dev].speedCode = speedCode;
+      }
     return;
   }
 
   int reg = lookupSpeedTable(cab);
+//  DIAG(F("\nReg=%d cab=%d speedCode=%d"),reg,cab,speedCode);
   if(reg >= 0) speedTable[reg].speedCode = speedCode;
 }
 

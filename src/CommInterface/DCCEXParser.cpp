@@ -111,8 +111,9 @@ void DCCEXParser::parse(Print* stream, const char *com) {
     if (speed<0) speed=1; // emergency stop DCC speed
     else if (speed>0) speed++; // map 1-126 -> 2-127
 
-    uint8_t speedCode = (speed & 0x7F) + p[3]==0 ? 0 : 128;
+    uint8_t speedCode = speed + p[3] * 128;
 
+    DIAG(F("\np1==%d speedCode=%d"),p[1],speedCode);
     if(mainTrack->setThrottle(p[1], speedCode, throttleResponse) == ERR_OK)
     CommManager::send(stream, F("<T %d %d %d>"), p[1], p[2], p[3]);
     
